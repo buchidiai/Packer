@@ -36,6 +36,19 @@ source "amazon-ebs" "nomad" {
   ssh_username = "ubuntu"
 }
 
+build {
+  sources = ["source.amazon-ebs.nomad"]
+
+  provisioner "shell" {
+    environment_vars = [
+    "USERNAME=${var.docker_username}",
+    "PASSWORD=${var.docker_password}"
+  ]
+    script = "./setup.sh"
+  }
+
+}
+
 # 6f3aa60e-6d45-416e-b6b8-54900c63ddba
 # 679593333241
 # aws-marketplace/SupportedImages ubuntu-bionic-18.04-amd64-server 20210405-6f3aa60e-6d45-416e-b6b8-54900c63ddba
