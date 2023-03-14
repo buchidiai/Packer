@@ -47,6 +47,15 @@ build {
     script = "./setup.sh"
   }
 
+  provisioner "file" {
+    source      = "./daemon.json"
+    destination = "/tmp/daemon.json"
+  }
+
+  provisioner "shell" {
+    script = "./move-daemon.sh"
+  }
+
 }
 
 # 6f3aa60e-6d45-416e-b6b8-54900c63ddba
