@@ -94,7 +94,7 @@ resource "aws_iam_instance_profile" "nomad_log_profile" {
 }
 
 resource "aws_instance" "web" {
-  ami                         = "ami-0fa8c0b9fae38d32a"
+  ami                         = "ami-0acedcb636472b593"
   instance_type               = "t2.micro"
   subnet_id                   = aws_subnet.subnet_public.id
   vpc_security_group_ids      = [aws_security_group.sg_22_80.id]
