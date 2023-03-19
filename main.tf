@@ -3,7 +3,7 @@ terraform {
 }
 
 provider "aws" {
-  region = "us-east-1"
+  region = "us-east-2"
 }
 
 // Variables
@@ -94,7 +94,7 @@ resource "aws_iam_instance_profile" "nomad_log_profile" {
 }
 
 resource "aws_instance" "web" {
-  ami                         = "ami-0acedcb636472b593"
+  ami                         = "ami-00beb8a45c6da626e"
   instance_type               = "t2.micro"
   subnet_id                   = aws_subnet.subnet_public.id
   vpc_security_group_ids      = [aws_security_group.sg_22_80.id]

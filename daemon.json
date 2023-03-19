@@ -1,7 +1,7 @@
 {
   "log-driver": "awslogs",
   "log-opts": {
-    "awslogs-region": "us-east-1",
+    "awslogs-region": "us-east-2",
     "awslogs-group": "docker-logs"
   }
 }

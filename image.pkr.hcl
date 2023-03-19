@@ -23,15 +23,18 @@ source "amazon-ebs" "nomad" {
   ami_name      = "nomad-ec2-${local.timestamp}"
   instance_type = "t2.micro"
   region        = var.region
+  ami_virtualization_type = "hvm"
+
 
   source_ami_filter {
     filters = {
       name                = "ubuntu/images/hvm-ssd/ubuntu-bionic-18.04-amd64-server-*"
       root-device-type    = "ebs"
       virtualization-type = "hvm"
+
     }
     most_recent = true
-    owners      = ["679593333241"]
+    owners      = ["099720109477"]
   }
   ssh_username = "ubuntu"
 }
@@ -42,8 +45,8 @@ build {
   provisioner "file" {
     source      = "./tf-packer.pub"
     destination = "/tmp/tf-packer.pub"
-  }
 
+  }
 
   provisioner "shell" {
     environment_vars = [
@@ -64,6 +67,22 @@ build {
 
 }
 
-# 6f3aa60e-6d45-416e-b6b8-54900c63ddba
-# 679593333241
-# aws-marketplace/SupportedImages ubuntu-bionic-18.04-amd64-server 20210405-6f3aa60e-6d45-416e-b6b8-54900c63ddba
+
+# source "amazon-ebs" "nomad" {
+#   ami_name      = "nomad-ec2-${local.timestamp}"
+#   instance_type = "t4g.micro"   # Change instance type to t4g.micro
+#   region        = var.region
+#   ami_virtualization_type = "hvm"
+
+#   source_ami_filter {
+#     filters = {
+#       name                = "amzn2-ami-hvm-*-arm64-ebs"
+#       root-device-type    = "ebs"
+#       virtualization-type = "hvm"
+#     }
+#     most_recent = true
+#     owners      = ["amazon"]
+#   }
+
+#   ssh_username = "ec2-user"
+# }

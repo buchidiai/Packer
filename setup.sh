@@ -3,10 +3,15 @@
 # tell bash to print out the statements as they are being executed so that we can see them running
 set -x
 
+# create CloudWatch log group if it does not exist
+# if ! aws logs describe-log-groups --log-group-name docker-logs > /dev/null 2>&1; then
+#     aws logs create-log-group --log-group-name docker-logs
+# fi
+
 # Install necessary dependencies - install docker - first run update - comments
-sudo apt-get update -y
+sudo DEBIAN_FRONTEND=noninteractive apt-get update -y
 # Update the apt package index and install packages to allow apt to use a repository over HTTPS:
-sudo apt-get install \
+sudo DEBIAN_FRONTEND=noninteractive apt-get install \
     apt-transport-https \
     ca-certificates \
     curl \
@@ -19,13 +24,13 @@ echo \
   "deb [arch=amd64 signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu \
   $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
 # install docker
-sudo apt-get update -y
-sudo apt-get install docker-ce docker-ce-cli containerd.io -y
+sudo DEBIAN_FRONTEND=noninteractive apt-get update -y
+sudo DEBIAN_FRONTEND=noninteractive apt-get install docker-ce docker-ce-cli containerd.io -y
 # verify the installation by running hello-world image as container
 sudo docker run hello-world
 # login to docker and pull down image
 sudo docker login --username $USERNAME --password $PASSWORD
-sudo docker pull hippopotamusvulture/nomad
+sudo docker pull hippopotamusvulture/nomad:node14
 
 # Setup sudo to allow no-password sudo for "hashicorp" group and adding "terraform" user
 sudo groupadd -r hashicorp
