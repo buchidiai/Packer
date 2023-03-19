@@ -66,23 +66,3 @@ build {
   }
 
 }
-
-
-# source "amazon-ebs" "nomad" {
-#   ami_name      = "nomad-ec2-${local.timestamp}"
-#   instance_type = "t4g.micro"   # Change instance type to t4g.micro
-#   region        = var.region
-#   ami_virtualization_type = "hvm"
-
-#   source_ami_filter {
-#     filters = {
-#       name                = "amzn2-ami-hvm-*-arm64-ebs"
-#       root-device-type    = "ebs"
-#       virtualization-type = "hvm"
-#     }
-#     most_recent = true
-#     owners      = ["amazon"]
-#   }
-
-#   ssh_username = "ec2-user"
-# }
